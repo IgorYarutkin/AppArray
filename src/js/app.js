@@ -8,7 +8,7 @@
  * Генератор случайного числа
  * @param {number} min
  * @param {number} max
- * @return (number) rand
+ * @return {number} rand
  */
 function randomInteger(min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -55,7 +55,7 @@ function randomName(min, max) {
  * @param {string} color - поле цвет
  * @return {object}
  */
-function Constructor(id, name, color) {
+function Item(id, name, color) {
   this.id = id;
   this.name = name;
   this.color = color;
@@ -65,13 +65,15 @@ function Constructor(id, name, color) {
  * Функция создания массива объектов
  * @return {object} array
  */
-function makeArray() {
+function makeArray(rows, cols) {
   console.log('Функция makeArray');
   var array = [];
-  var object;
-  for(var i = 0; i < 2048; i++) {
-    object = new Constructor(i, randomName(3, 8), randomColor());
-    array[i] = object;
+  var row;
+  for(var i = 0; i < rows; i++) {
+    array.push(row = []);
+    for (var j = 0; j < cols; j++) {
+      row.push(new Item(i * cols + j, randomName(3, 8), randomColor()));
+    }
   }
   return array;
 }
@@ -84,38 +86,37 @@ function makeArray() {
 var content = document.querySelector('.table__content');
 
 // Создание массива
-var randomArray = makeArray();
+var randomArray = makeArray(256, 8);
 
-
-// Шаблон
-var rowTemplate = document.getElementById('row-template');
-console.log(rowTemplate);
-var elementToClone;
-if ('content' in rowTemplate) {
-  elementToClone = rowTemplate.content.querySelector('.table__row');
-} else {
-  elementToClone = rowTemplate.querySelector('.table__row');
-}
 
 
 /**
- * Конструктор строки таблицы
- * @param {number} n  // номер строки
+ * Создает строку таблицы
+ * @param {array} items
  * @return {object}
  */
-function Row(n) {
-  this.element = elementToClone.cloneNode(true);
-  console.dir(this.element);
-  this.tableCell = this.element.querySelector('.table__cell');
-  this.tableCell.innerHTML = randomArray[8 * n - 8].name;
-  this.tableCell.setAttribute('data-bg-color', randomArray[8 * n - 8].color);
-  var oneMoreCell = this.tableCell;
-  for (var i = 7; i > 0; i--) {
-    oneMoreCell.innerHTML = randomArray[8 * n - i].name;
-    this.tableCell.setAttribute('data-bg-color', randomArray[8 * n - i].color);
-    this.element.appendChild(oneMoreCell);
-  }
+function createRow(items) {
+  var element = document.createElement('tr');
+  element.classList.add('table__row');
+  items.forEach(function(item) {
+    element.appendChild(createCell(item));
+  });
+  return element;
 }
+
+/**
+ * Создает ячейку таблицы
+ * @param {object} item  // номер строки
+ * @return {object}
+ */
+function createCell(item) {
+  var element = document.createElement('td');
+  element.classList.add('table__cell');
+  element.innerHTML = item.name;
+  element.dataset.color = item.color;
+  return element;
+}
+
 
 /**
  * Функция добавления строк
@@ -123,10 +124,9 @@ function Row(n) {
  * @param {number} q  // количество строк
  */
 function addRows(n, q) {
-  for (var i = 0; i < q; i++) {
-    var rowToAdd = new Row(n++);
-    content.appendChild(rowToAdd.element);
-  }
+  randomArray.slice(n, n + q).forEach(function(row) {
+    content.appendChild(createRow(row));
+  });
 }
 
 
@@ -139,5 +139,5 @@ function addRows(n, q) {
 */
 
 function changeColor(evt) {
-  evt.target.style.background = evt.target.getAttribute('data-bg_color');
+  evt.target.style.background = evt.target.getAttribute('data-bg-color');
 }
