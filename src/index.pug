@@ -8,21 +8,25 @@ html(lang="ru")
     link(rel="stylesheet", href="/css/style.min.css")
 
   body
+    input.radio(id="main" type="radio" name="section" checked)
+    input.radio(id="table" type="radio" name="section")
     .container
       header.switcher
-        .switcher__tab
-          span.switcher__link Главная страница
-        .switcher__tab.switcher__tab--not-active.switcher__tab--disabled
-          a.switcher__link(href="table.html") Таблица
+        .switcher__tab.switcher__tab--main
+          label.switcher__label(for="main") Приветствие
+        .switcher__tab.switcher__tab--table
+          label.switcher__label.switcher__label(for="table") Таблица
 
       main.page-content
-        .page-content__description
-          p.page-content__text
+        section.description
+          p.description__text
             | Данное приложение создает массив из 2&nbsp;048&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.
-          p.page-content__text
-            | Созданный массив отрисовывается в таблице на странице "Таблица"
-        .control
-          button.control__button Создать массив
+          p.description__text
+            | Созданный массив отрисовывается в таблице в разделе "Таблица". ОБновление приложения создает массив заново.
+        section.table
+          table.table__content Таблица
+
+            
 
       footer.copyright
         .copyright__container
@@ -30,4 +34,9 @@ html(lang="ru")
             | Приложение создано
             a.copyright__link(href="http://igoryarutkin.github.io/") И. Яруткиным
 
+    template#row-template
+      tr.table__row
+        td.table__cell(data-bg-color="")
+
     script(src="app.js")
+    

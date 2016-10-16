@@ -1,0 +1,22 @@
+#table:checked ~ .container .page-content,
+#table:checked ~ .container .copyright {
+  background-color: var(--bgColorSecondary);
+}
+#main:checked ~ .container .switcher__tab--main,
+#table:checked ~ .container .switcher__tab--table {
+  box-shadow: inset 0px 1px var(--borderColor),
+    inset -1px 0 var(--borderColor),
+    inset 1px 0 var(--borderColor);
+}
+#main:checked ~ .container .switcher__tab--main .switcher__label,
+#table:checked ~ .container .switcher__tab--table .switcher__label {
+  cursor: default;
+}
+#main:checked ~ .container .table,
+#table:checked ~ .container .description {
+  display: none;
+}
+#main:checked ~ .container .description,
+#table:checked ~ .container .table {
+  display: block;
+}

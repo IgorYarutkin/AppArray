@@ -1,0 +1,6 @@
+.description {
+  padding: 10px 50px;
+  &__text {
+    font-size: 18px;
+  }
+}

@@ -16,7 +16,9 @@ var csso = require('gulp-csso');
 
 gulp.task('html', function() {
   return gulp.src('src/*.pug')
-    .pipe(pug({}))
+    .pipe(pug({
+      pretty: true
+    }))
     .pipe(gulp.dest('build'))
     .pipe(size())
     .pipe(server.reload({stream: true}));
