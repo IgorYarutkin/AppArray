@@ -1,0 +1,30 @@
+.switcher {
+  display: flex;
+  &__tab {
+    flex-grow: 1;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: inset 0px 1px var(--borderColor),
+      inset -1px 0 var(--borderColor),
+      inset 1px 0 var(--borderColor);
+    &:nth-child(1) {
+      background-color: var(--bgColorPrimary);
+    }
+    &:nth-child(2) {
+      background-color: var(--bgColorSecondary);
+    }
+    &--not-active {
+      box-shadow: inset 0px 1px var(--borderColor),
+        inset -1px 0 var(--borderColor),
+        inset 0 -1px #fff;
+    }
+    &--disabled a {
+      color: color(var(--colorFont) blackness(50%));
+    }
+  }
+  &__link {
+  display: block;
+  padding: 10px 0;
+  }
+}

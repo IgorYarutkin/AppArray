@@ -40,7 +40,7 @@ gulp.task('style', function() {
 
 gulp.task('js', function() {
   return gulp.src('src/js/app.js')
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('build'))
     .pipe(size())
     .pipe(server.reload({stream: true}));

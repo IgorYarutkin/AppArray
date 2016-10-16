@@ -1,0 +1,12 @@
+.control {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  &__button {
+    padding: 15px 45px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    background: var(--bgColorButton)
+  }
+}

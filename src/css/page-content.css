@@ -1,0 +1,10 @@
+.page-content {
+  padding: 20px 60px;
+  flex-grow: 1;
+  background-color: var(--bgColorPrimary);
+  box-shadow: inset -1px 0 var(--borderColor),
+    inset 1px 0 var(--borderColor);
+  &__text {
+    font-size: 18px;
+  }
+}

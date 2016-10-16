@@ -1,0 +1,33 @@
+doctype html
+html(lang="ru")
+
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Главная страница
+    link(rel="stylesheet", href="/css/style.min.css")
+
+  body
+    .container
+      header.switcher
+        .switcher__tab
+          span.switcher__link Главная страница
+        .switcher__tab.switcher__tab--not-active.switcher__tab--disabled
+          a.switcher__link(href="table.html") Таблица
+
+      main.page-content
+        .page-content__description
+          p.page-content__text
+            | Данное приложение создает массив из 2&nbsp;048&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.
+          p.page-content__text
+            | Созданный массив отрисовывается в таблице на странице "Таблица"
+        .control
+          button.control__button Создать массив
+
+      footer.copyright
+        .copyright__container
+          .copyright__text
+            | Приложение создано
+            a.copyright__link(href="http://igoryarutkin.github.io/") И. Яруткиным
+
+    script(src="app.js")
