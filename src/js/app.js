@@ -200,3 +200,5 @@ function changeColor(evt) {
 
 mainTab.addEventListener('click', switcher);
 tableTab.addEventListener('click', switcher);
+
+/******** Троттлинг ******************/
