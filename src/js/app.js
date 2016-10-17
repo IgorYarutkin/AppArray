@@ -181,7 +181,7 @@ function selectTab(id) {
 }
 
 function switcher(evt) {
-  selectTab(evt.currentTarget.id);
+  window.location.hash = (evt.currentTarget.id);
 }
 
 /**
@@ -198,10 +198,7 @@ function changeColor(evt) {
 
 mainTab.addEventListener('click', switcher);
 tableTab.addEventListener('click', switcher);
-window.addEventListener('scroll', addMoreRowsThrottle);
-window.addEventListener('scroll', function() {
-  console.log('Test');
-});
+tableContainer.addEventListener('scroll', throttle(addMoreRows, DELAY));
 
 
 /**************** Подгрузка и Троттлинг ***************/
@@ -236,7 +233,16 @@ function addMoreRows() {
   }
 }
 
-function addMoreRowsThrottle() {
-  console.log('Проверка скролла');
-  throttle(addMoreRows, DELAY);
+/***** Проверка адресной строки *************/
+
+window.addEventListener('hashchange', changeState);
+
+function changeState() {
+  if (window.location.hash.slice(1) === 'main' || window.location.hash.slice(1) === 'table') {
+    selectTab(window.location.hash.slice(1));
+  }
+}
+
+if (window.location.hash) {
+  changeState();
 }

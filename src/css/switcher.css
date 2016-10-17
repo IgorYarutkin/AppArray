@@ -1,5 +1,6 @@
 .switcher {
   display: flex;
+  flex-shrink: 0;
   &__tab {
     flex-grow: 1;
     text-align: center;
