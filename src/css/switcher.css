@@ -1,0 +1,28 @@
+.switcher {
+  display: flex;
+  flex-shrink: 0;
+  &__tab {
+    flex-grow: 1;
+    text-align: center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: var(--bgColorNotActive);
+    box-shadow: inset 0px 1px var(--borderColor),
+      inset -1px 0 var(--borderColor),
+      inset 0 -1px #fff;
+    &--active {
+      background-color: var(--bgColorActive);
+      box-shadow: inset 0px 1px var(--borderColor),
+        inset -1px 0 var(--borderColor),
+        inset 1px 0 var(--borderColor);
+    }
+  }
+  &__label {
+  display: block;
+  padding: 10px 0;
+  cursor: pointer;
+  }
+}
+.switcher__tab--active .switcher__label {
+  cursor: default;
+}

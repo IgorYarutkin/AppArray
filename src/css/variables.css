@@ -1,0 +1,9 @@
+:root {
+  --fontSizePrimary: 14px;
+  --font: Arial, sans-serif;
+  --colorFont: #fff;
+  --bgColorActive: #bbb;
+  --bgColorNotActive: #555;
+  --borderColor: #000;
+  --borderTableCell: #999999;
+}

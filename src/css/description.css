@@ -1,0 +1,10 @@
+.description {
+  padding: 10px 50px;
+  display: none;
+  &__text {
+    font-size: 18px;
+  }
+  &--active {
+    display: block;
+  }
+}

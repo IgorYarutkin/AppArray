@@ -1,0 +1,9 @@
+body {
+  color: var(--colorFont);
+  font-family: var(--font);
+  font-size: var(--fontSizePrimary);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
