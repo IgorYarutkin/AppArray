@@ -101,7 +101,7 @@ var lastRow = 0;
 
 var ROW_HEIGHT = 32;
 var ADDITIONAL_ROWS = 10;
-var DELAY = 100;
+var DELAY = 50;
 
 // Создание массива
 var randomArray = makeArray(256, 8);
