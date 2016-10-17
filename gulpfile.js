@@ -60,7 +60,7 @@ gulp.task('serve', function() {
   server.init({
     server: 'build',
     notify: false,
-    open: false,
+    open: true,
     ui: false
   });
   gulp.watch('src/*.pug', ['html']);
