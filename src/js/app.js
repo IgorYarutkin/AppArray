@@ -105,7 +105,6 @@ var DELAY = 100;
 
 // Создание массива
 var randomArray = makeArray(256, 8);
-console.log(new Date()); // отладочный код
 
 
 
@@ -180,13 +179,7 @@ function selectTab(id) {
 }
 
 function switcher(evt) {
-  if (evt.currentTarget.id === 'main') {
-    window.location.hash = '#main';
-    history.pushState({section: 'Приветствие'}, 'Приветствие', '#main');
-  } else if (evt.currentTarget.id === 'table') {
-    window.location.hash = '#table';
-    history.pushState({section: 'Таблица'}, 'Таблица', '#table');
-  }
+  window.location.hash = evt.currentTarget.id;
 }
 
 /****** Смена цвета фона ячейки ***********/
@@ -244,10 +237,9 @@ function addMoreRows() {
   }
 }
 
-/***** Проверка адресной строки и нажатия кнопки Назад *************/
+/***** Проверка адресной строки *************/
 
-// window.addEventListener('hashchange', changeState);
-window.addEventListener('popstate', changeState);
+window.addEventListener('hashchange', changeState);
 
 function changeState() {
   if (window.location.hash.slice(1) === 'main' || window.location.hash.slice(1) === 'table') {
