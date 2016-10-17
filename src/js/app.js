@@ -175,24 +175,35 @@ function selectTab(id) {
 
   // начальная отрисовка таблицы при первом выборе вкладки
   if (!isMain && !content.hasChildNodes()) {
-    console.log('Начальное добавление таблицы');
     addRows(lastRow, calculateInitialRows());
   }
 }
 
 function switcher(evt) {
-  window.location.hash = (evt.currentTarget.id);
-}
-
-/**
- * Меняет цвет фона ячейки
- * @param {object} evt
- */
-function changeColor(evt) {
-  if(evt.target.dataset.bgColor) {
-    evt.target.style.background = evt.target.dataset.bgColor;
+  if (evt.currentTarget.id === 'main') {
+    window.location.hash = '#main';
+    history.pushState({section: 'Приветствие'}, 'Приветствие', '#main');
+  } else if (evt.currentTarget.id === 'table') {
+    window.location.hash = '#table';
+    history.pushState({section: 'Таблица'}, 'Таблица', '#table');
   }
 }
+
+/****** Смена цвета фона ячейки ***********/
+
+var oldElement = null;
+
+function colorize(evt) {
+  var bgColor;
+  if(oldElement) {
+    oldElement.style.backgroundColor = '';
+  }
+  bgColor = evt.target.dataset.color;
+  evt.target.style.backgroundColor = bgColor;
+  oldElement = evt.target;
+}
+
+tableContainer.addEventListener('click', colorize);
 
 /****** Установка обработчиков *************/
 
@@ -233,9 +244,10 @@ function addMoreRows() {
   }
 }
 
-/***** Проверка адресной строки *************/
+/***** Проверка адресной строки и нажатия кнопки Назад *************/
 
-window.addEventListener('hashchange', changeState);
+// window.addEventListener('hashchange', changeState);
+window.addEventListener('popstate', changeState);
 
 function changeState() {
   if (window.location.hash.slice(1) === 'main' || window.location.hash.slice(1) === 'table') {
