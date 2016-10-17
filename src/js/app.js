@@ -164,8 +164,11 @@ function calculateInitialRows() {
 function selectTab(id) {
   console.log(id);
   var flag = id === 'main' ? true : false;
-  mainTab.classList.toggle('.switcher__tab--active', flag);
-  tableTab.classList.toggle('.switcher__tab--active', !flag);
+  console.log(flag);
+  mainTab.classList.toggle('switcher__tab--active', flag);
+  tableTab.classList.toggle('switcher__tab--active', !flag);
+  descriptionContainer.classList.toggle('description--active', flag);
+  tableContainer.classList.toggle('table--active', !flag);
 
   // начальная отрисовка таблицы при первом выборе вкладки
   if (flag === false && !content.hasChildNodes()) {
@@ -176,7 +179,7 @@ function selectTab(id) {
 
 function switcher(evt) {
   console.log(evt);
-  selectTab(evt.target.id);
+  selectTab(evt.currentTarget.id);
 }
 
 /**
