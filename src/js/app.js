@@ -96,10 +96,12 @@ var content = document.querySelector('.table__content');
 var mainTab = document.querySelector('#main');
 var tableTab = document.querySelector('#table');
 var mainContainer = document.querySelector('.page-content');
-var footer = document.querySelector('.copyright');
+
+var lastRow = 0;
 
 var ROW_HEIGHT = 32;
 var ADDITIONAL_ROWS = 10;
+var DELAY = 100;
 
 // Создание массива
 var randomArray = makeArray(256, 8);
@@ -144,6 +146,7 @@ function addRows(start, count) {
   randomArray.slice(start, start + count).forEach(function(row) {
     content.appendChild(createRow(row));
   });
+  lastRow = start + count;
 }
 
 
@@ -154,11 +157,6 @@ function calculateInitialRows() {
   return Math.floor(tableContainer.getBoundingClientRect().height / ROW_HEIGHT) + ADDITIONAL_ROWS;
 }
 
-
-/*************
-  Отрисовка таблицы при загрузке
-************/
-  //отрисовка когда переключается на вкладку
 
 
 /****** Функции обработчиков *************/
@@ -178,7 +176,7 @@ function selectTab(id) {
   // начальная отрисовка таблицы при первом выборе вкладки
   if (!isMain && !content.hasChildNodes()) {
     console.log('Начальное добавление таблицы');
-    addRows(0, calculateInitialRows());
+    addRows(lastRow, calculateInitialRows());
   }
 }
 
@@ -200,5 +198,45 @@ function changeColor(evt) {
 
 mainTab.addEventListener('click', switcher);
 tableTab.addEventListener('click', switcher);
+window.addEventListener('scroll', addMoreRowsThrottle);
+window.addEventListener('scroll', function() {
+  console.log('Test');
+});
 
-/******** Троттлинг ******************/
+
+/**************** Подгрузка и Троттлинг ***************/
+
+var MIN_ROWS = 2;
+var GAP = ROW_HEIGHT * MIN_ROWS;
+
+/**
+ * Создает задержку проверки необходимости подгрузки строк таблицы
+ * @param {function} func - функция, которую нужно выполнить с задержкой
+ * @param {number} delay - время задержки в мс
+ * @return {function} func - функция, выполненная с задержкой
+ */
+function throttle(func, delay) {
+  var lastTime = 0;
+
+  return function() {
+    var currentTime = new Date();
+    if ((currentTime - lastTime) > delay) {
+      func();
+      lastTime = currentTime;
+    }
+  };
+}
+
+/**
+ * Проверяет нужно ли подгружать строки таблицы
+ */
+function addMoreRows() {
+  if((content.getBoundingClientRect().bottom - mainContainer.getBoundingClientRect().bottom) < GAP) {
+    addRows(lastRow, ADDITIONAL_ROWS);
+  }
+}
+
+function addMoreRowsThrottle() {
+  console.log('Проверка скролла');
+  throttle(addMoreRows, DELAY);
+}
