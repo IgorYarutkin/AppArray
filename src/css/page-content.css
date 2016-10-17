@@ -2,7 +2,7 @@
   padding: 10px;
   display: flex;
   flex-grow: 1;
-  background-color: var(--bgColorPrimary);
+  background-color: var(--bgColorActive);
   box-shadow: inset -1px 0 var(--borderColor),
     inset 1px 0 var(--borderColor);
 }

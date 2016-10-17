@@ -1,12 +1,9 @@
 .copyright {
   padding: 0 20px;
-  background-color: var(--bgColorPrimary);
+  background-color: var(--bgColorActive);
   box-shadow: inset -1px 0 var(--borderColor),
     inset 1px 0 var(--borderColor),
     inset 0 -1px var(--borderColor);
-  &--page-table {
-    background-color: var(--bgColorSecondary);
-  }
   &__container {
     display: flex;
     justify-content: flex-end;

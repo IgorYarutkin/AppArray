@@ -7,18 +7,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-button {
-  color: inherit;
-  border: none;
-  &:active {
-    color: color(var(--colorFont) blackness(20%));
-    background-color: color(var(--bgColorButton) blackness(20%));
-    box-shadow: inset 0 2px color(var(--borderColor) lightness(30%));
-  }
-  &:focus {
-    outline: none;
-  }
-}
-input.radio {
-  display: none;
-}

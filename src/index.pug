@@ -8,21 +8,19 @@ html(lang="ru")
     link(rel="stylesheet", href="/css/style.min.css")
 
   body
-    input.radio(id="main" type="radio" name="section" checked)
-    input.radio(id="table" type="radio" name="section")
     .container
       header.switcher
-        .switcher__tab.switcher__tab--main
-          label.switcher__label(for="main") Приветствие
-        .switcher__tab.switcher__tab--table
-          label.switcher__label.switcher__label(for="table") Таблица
+        .switcher__tab.switcher__tab--active(id="main")
+          span.switcher__label Приветствие
+        .switcher__tab(id="table")
+          span.switcher__label.switcher__label Таблица
 
       main.page-content
-        section.description
+        section.description.description--active
           p.description__text
-            | Данное приложение создает массив из 2&nbsp;048&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.
+            | Данное приложение создает массив из 8&nbsp;x&nbsp;256&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.
           p.description__text
-            | Созданный массив отрисовывается в таблице в разделе "Таблица". ОБновление приложения создает массив заново.
+            | Созданный массив отрисовывается в таблице в разделе "Таблица". Обновление приложения создает массив заново.
         section.table
           table.table__content
 

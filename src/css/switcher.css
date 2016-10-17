@@ -5,14 +5,15 @@
     text-align: center;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    background-color: var(--bgColorNotActive);
     box-shadow: inset 0px 1px var(--borderColor),
       inset -1px 0 var(--borderColor),
       inset 0 -1px #fff;
-    &:nth-child(1) {
-      background-color: var(--bgColorPrimary);
-    }
-    &:nth-child(2) {
-      background-color: var(--bgColorSecondary);
+    &--active {
+      background-color: var(--bgColorActive);
+      box-shadow: inset 0px 1px var(--borderColor),
+        inset -1px 0 var(--borderColor),
+        inset 1px 0 var(--borderColor);
     }
   }
   &__label {

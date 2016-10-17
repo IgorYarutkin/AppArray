@@ -66,7 +66,6 @@ function Item(id, name, color) {
  * @return {object} array
  */
 function makeArray(rows, cols) {
-  console.log('Функция makeArray');
   var array = [];
   var row;
   for(var i = 0; i < rows; i++) {
@@ -83,10 +82,21 @@ function makeArray(rows, cols) {
 /****************************
   Отрисовка массива в таблице
 *****************************/
+
+var tableContainer = document.querySelector('.table');
+var descriptionContainer = document.querySelector('.description');
 var content = document.querySelector('.table__content');
+var mainTab = document.querySelector('#main');
+var tableTab = document.querySelector('#table');
+var mainContainer = document.querySelector('.page-content');
+var footer = document.querySelector('.copyright');
+
+var ROW_HEIGHT = 32;
+var ADDITIONAL_ROWS = 10;
 
 // Создание массива
 var randomArray = makeArray(256, 8);
+console.log(new Date()); // отладочный код
 
 
 
@@ -130,14 +140,54 @@ function addRows(n, q) {
 }
 
 
+/******
+  Определение начального количества выводимых строк
+********/
+function calculateInitialRows() {
+  return Math.floor(tableContainer.getBoundingClientRect().height / ROW_HEIGHT) + ADDITIONAL_ROWS;
+}
 
 
+/*************
+  Отрисовка таблицы при загрузке
+************/
+  //отрисовка когда переключается на вкладку
 
 
+/****** Функции обработчиков *************/
 
-/* Установка обработчиков скролла
-*/
+/**
+ * Переключает разделы приложения при выборе вкладки.
+ * Отрисовывает таблицу при первом выборе вкладки "Таблица"
+ * @param {string} id
+ */
+function selectTab(id) {
+  console.log(id);
+  var flag = id === 'main' ? true : false;
+  mainTab.classList.toggle('.switcher__tab--active', flag);
+  tableTab.classList.toggle('.switcher__tab--active', !flag);
 
+  // начальная отрисовка таблицы при первом выборе вкладки
+  if (flag === false && !content.hasChildNodes()) {
+    console.log('Начальное добавление таблицы');
+    addRows(0, calculateInitialRows());
+  }
+}
+
+function switcher(evt) {
+  console.log(evt);
+  selectTab(evt.target.id);
+}
+
+/**
+ * Меняет цвет фона ячейки
+ * @param {object} evt
+ */
 function changeColor(evt) {
   evt.target.style.background = evt.target.getAttribute('data-bg-color');
 }
+
+/****** Установка обработчиков *************/
+
+mainTab.addEventListener('click', switcher);
+tableTab.addEventListener('click', switcher);

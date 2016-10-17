@@ -1,7 +1,11 @@
 .table {
+  display: none;
   flex-grow: 1;
   overflow: scroll;
   background-color: #fff;
+  &--active {
+    display: block;
+  }
   &__content {
     width: 2400px;
     table-layout: fixed;
@@ -10,7 +14,7 @@
   }
   &__cell {
     width: 300px;
-    height: 32px;
+    height: 28px;
     text-align: center;
     text-transform: uppercase;
     border: 1px solid var(--borderTableCell);
