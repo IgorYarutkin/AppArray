@@ -187,12 +187,10 @@ function switcher(evt) {
 var oldElement = null;
 
 function colorize(evt) {
-  var bgColor;
   if(oldElement) {
     oldElement.style.backgroundColor = '';
   }
-  bgColor = evt.target.dataset.color;
-  evt.target.style.backgroundColor = bgColor;
+  evt.target.style.backgroundColor = evt.target.dataset.color;
   oldElement = evt.target;
 }
 
