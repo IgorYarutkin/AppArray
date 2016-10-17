@@ -11,15 +11,13 @@
  * @return {number} rand
  */
 function randomInteger(min, max) {
-  var rand = min + Math.random() * (max + 1 - min);
-  rand = Math.floor(rand);
-  return rand;
+  return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
 /**
  * Генератор случайного цвета в hex
  * использует функцию генератор случайного числа
- * @return (string) color
+ * @return {string} color
  */
 function randomColor() {
   var color = '#';
@@ -33,27 +31,34 @@ function randomColor() {
  * Генератор случайного имени
  * использует функцию генератор случайного числа
  * @param {number} n - количество букв в имени
- * @return (string) name
+ * @return {string} name
  */
 function randomName(min, max) {
 // переделать функцию на создание имени со случайным количеством букв от min до max
 // Здесь будет проверка переданных значений и установка значений по умолчанию при отсутствии переданных значений или их неправильности
   var n = randomInteger(min, max);
-  var abd = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', ABD = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ';
-  var aL = abd.length, AL = ABD.length;
-  var name = '' + ABD[randomInteger(0, AL - 1)];
+  var abcd = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', ABCD = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ';
+  var aL = abcd.length, AL = ABCD.length;
+  var name = '' + ABCD[randomInteger(0, AL - 1)];
   while(name.length < n) {
-    name += abd[randomInteger(0, aL - 1)];
+    name += abcd[randomInteger(0, aL - 1)];
   }
   return name;
 }
 
 /**
+ * @typedef {object} Item
+ * @property {number} id
+ * @property {string} name
+ * @property {string} color
+ */
+
+/**
  * Конструктор объекта - элемента массива
+ * @constructor
  * @param {number} id - поле идентификатор
  * @param {string} name - поле имя
  * @param {string} color - поле цвет
- * @return {object}
  */
 function Item(id, name, color) {
   this.id = id;
@@ -62,7 +67,9 @@ function Item(id, name, color) {
 }
 
 /**
- * Функция создания массива объектов
+ * Создает массив объектов
+ * @param {number} rows - число строк
+ * @param {number} cols - число столбцов
  * @return {object} array
  */
 function makeArray(rows, cols) {
@@ -102,8 +109,8 @@ console.log(new Date()); // отладочный код
 
 /**
  * Создает строку таблицы
- * @param {array} items
- * @return {object}
+ * @param {Item[]} items
+ * @return {HTMLTableRowElement}
  */
 function createRow(items) {
   var element = document.createElement('tr');
@@ -116,8 +123,8 @@ function createRow(items) {
 
 /**
  * Создает ячейку таблицы
- * @param {object} item  // номер строки
- * @return {object}
+ * @param {Item} item  - объект массива
+ * @return {HTMLTableCellElement}
  */
 function createCell(item) {
   var element = document.createElement('td');
@@ -130,11 +137,11 @@ function createCell(item) {
 
 /**
  * Функция добавления строк
- * @param {number} n  // начальный номер строки
- * @param {number} q  // количество строк
+ * @param {number} start - начальный номер строки
+ * @param {number} count - количество строк
  */
-function addRows(n, q) {
-  randomArray.slice(n, n + q).forEach(function(row) {
+function addRows(start, count) {
+  randomArray.slice(start, start + count).forEach(function(row) {
     content.appendChild(createRow(row));
   });
 }
@@ -162,23 +169,20 @@ function calculateInitialRows() {
  * @param {string} id
  */
 function selectTab(id) {
-  console.log(id);
-  var flag = id === 'main' ? true : false;
-  console.log(flag);
-  mainTab.classList.toggle('switcher__tab--active', flag);
-  tableTab.classList.toggle('switcher__tab--active', !flag);
-  descriptionContainer.classList.toggle('description--active', flag);
-  tableContainer.classList.toggle('table--active', !flag);
+  var isMain = id === 'main' ? true : false;
+  mainTab.classList.toggle('switcher__tab--active', isMain);
+  tableTab.classList.toggle('switcher__tab--active', !isMain);
+  descriptionContainer.classList.toggle('description--active', isMain);
+  tableContainer.classList.toggle('table--active', !isMain);
 
   // начальная отрисовка таблицы при первом выборе вкладки
-  if (flag === false && !content.hasChildNodes()) {
+  if (!isMain && !content.hasChildNodes()) {
     console.log('Начальное добавление таблицы');
     addRows(0, calculateInitialRows());
   }
 }
 
 function switcher(evt) {
-  console.log(evt);
   selectTab(evt.currentTarget.id);
 }
 
@@ -187,7 +191,9 @@ function switcher(evt) {
  * @param {object} evt
  */
 function changeColor(evt) {
-  evt.target.style.background = evt.target.getAttribute('data-bg-color');
+  if(evt.target.dataset.bgColor) {
+    evt.target.style.background = evt.target.dataset.bgColor;
+  }
 }
 
 /****** Установка обработчиков *************/
