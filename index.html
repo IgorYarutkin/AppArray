@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="switcher">
+        <div class="switcher__tab switcher__tab--active" id="main"><span class="switcher__label">Приветствие</span></div>
+        <div class="switcher__tab" id="table"><span class="switcher__label">Таблица</span></div>
+      </header>
+      <main class="page-content">
+        <section class="description description--active">
+          <p class="description__text">Данное приложение создает массив из 8&nbsp;x&nbsp;256&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.</p>
+          <p class="description__text">Созданный массив отрисовывается в таблице в разделе "Таблица". Обновление приложения создает массив заново.</p>
+        </section>
+        <section class="table">
+          <table class="table__content"></table>
+        </section>
+      </main>
+      <footer class="copyright">
+        <div class="copyright__container">
+          <div class="copyright__text">Приложение создано<a class="copyright__link" href="http://igoryarutkin.github.io/">И. Яруткиным</a></div>
+        </div>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
