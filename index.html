@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Главная страница</title>
-    <link rel="stylesheet" href="/css/style.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
   </head>
   <body>
     <div class="container">
@@ -15,7 +15,7 @@
       <main class="page-content">
         <section class="description description--active">
           <p class="description__text">Данное приложение создает массив из 8&nbsp;x&nbsp;256&nbsp;объектов со свойствами id, name, color. Свойство id является последовательным номером объекта в массиве. Свойства name и color сгенерированы случайным образом.</p>
-          <p class="description__text">Созданный массив отрисовывается в таблице в разделе "Таблица". Обновление приложения создает массив заново.</p>
+          <p class="description__text">Созданный массив отрисовывается в таблице в разделе "Таблица". Обновление приложения создает массив заново.  Первоначально отрисовывается количество строк, которое помещается в видимую область + 10 строк. Затем при скролле вниз строки таблицы подгружаются пачками по 10 строк. При нажатии на ячейку происходит смена фоного цвета ячейки на цвет установленный в массиве для данного объекта.</p>
         </section>
         <section class="table">
           <table class="table__content"></table>
